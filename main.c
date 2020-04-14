@@ -48,7 +48,8 @@ main(int argc, char *argv[]){
   printParetoArchive();
 
   freeArchive();
-  printf("end\n");
   fclose(fin);
+  free(line);
+
   exit(EXIT_SUCCESS);
 }
