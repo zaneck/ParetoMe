@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(paretoMe C)
+set(CMAKE_MACOSX_RPATH 1)
+
+set(PROJECT_VERSION_MAJOR 0)
+set(PROJECT_VERSION_MINOR 0)
+set(PROJECT_VERSION_PATCH 1)
+set(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
+
+enable_testing()
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+
+
+set(PARETOME_SRC_FILES_C main.c pareto.c list.c)
+set(PARETOME_SRC_FILES_H pareto.h list-local.h list.h)
+set(PARETOME_SRC_FILES ${PARETOME_SRC_FILES_H} ${PARETOME_SRC_FILES_C})
+
+add_executable(paretoMe ${PARETOME_SRC_FILES})
+
+install(
+	TARGETS paretoMe
+	RUNTIME DESTINATION bin COMPONENT "Runtime"
+)
