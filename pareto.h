@@ -16,4 +16,11 @@ extern void freeArchive(void);
 /*online mode*/
 extern void addToPareto(double*);
 
+extern double* max;
+extern double* min;
+
+extern void minMe(void *a);
+extern double* findMin(void);
+extern void maxMe(void *a);
+extern double* findMax(void);
 #endif

@@ -42,6 +42,42 @@ void freeArchive(void){
   freeList(data);
 }
 
+
+double* max = NULL;
+double* min = NULL;
+double* findMax(void){
+  max = (double*)calloc(dim, sizeof(double));
+  toAll(pareto, maxMe);
+  return max;
+}
+
+double* findMin(void){
+  min = (double*)calloc(dim, sizeof(double));
+  for(unsigned int i=0; i<dim; i++){
+    min[i] = 5;
+  }
+  toAll(pareto, minMe);
+  return min;
+}
+
+void maxMe(void *a){
+  double* alpha=(double*)a;
+  for(unsigned int i=0; i<dim; i++){
+    if (max[i] < alpha[i]){
+      max[i] = alpha[i];
+    }
+  }
+}
+
+void minMe(void *a){
+  double* alpha=(double*)a;
+  for(unsigned int i=0; i<dim; i++){
+    if (min[i] > alpha[i]){
+      min[i] = alpha[i];
+    }
+  }
+}
+
 /*
  * domine 1
  * enlarge 0
