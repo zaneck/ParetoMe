@@ -46,6 +46,62 @@ add_test(
 set_tests_properties(test_main_success_output PROPERTIES WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 
 add_test(
+	NAME test_main_option_success_output
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_option_success.sh $<TARGET_FILE:paretoMe> ${CMAKE_CURRENT_SOURCE_DIR}/data/sample.ssv
+)
+set_tests_properties(test_main_option_success_output PROPERTIES WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
+
+add_test(
+	NAME test_main_option_invalid_dim_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_option_invalid_dim.sh $<TARGET_FILE:paretoMe> ${CMAKE_CURRENT_SOURCE_DIR}/data/sample.ssv
+)
+
+add_test(
+	NAME test_main_option_invalid_flag_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_option_invalid_flag.sh $<TARGET_FILE:paretoMe>
+)
+
+add_test(
+	NAME test_main_option_help_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_option_help_message.sh $<TARGET_FILE:paretoMe>
+)
+
+add_test(
+	NAME test_main_option_extra_arg_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_option_extra_arg_message.sh $<TARGET_FILE:paretoMe> ${CMAKE_CURRENT_SOURCE_DIR}/data/sample.ssv
+)
+
+add_test(
+	NAME test_main_option_missing_file_arg_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_option_missing_file_arg_message.sh $<TARGET_FILE:paretoMe>
+)
+
+add_test(
+	NAME test_main_option_zero_dim_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_option_zero_dim_message.sh $<TARGET_FILE:paretoMe> ${CMAKE_CURRENT_SOURCE_DIR}/data/sample.ssv
+)
+
+add_test(
+	NAME test_main_option_overflow_dim_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_option_overflow_dim_message.sh $<TARGET_FILE:paretoMe> ${CMAKE_CURRENT_SOURCE_DIR}/data/sample.ssv
+)
+
+add_test(
+	NAME test_main_invalid_token_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_invalid_input_message.sh $<TARGET_FILE:paretoMe> ${CMAKE_CURRENT_SOURCE_DIR}/data/invalid_token.ssv
+)
+
+add_test(
+	NAME test_main_short_row_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_invalid_input_message.sh $<TARGET_FILE:paretoMe> ${CMAKE_CURRENT_SOURCE_DIR}/data/short_row.ssv
+)
+
+add_test(
+	NAME test_main_extra_value_message
+	COMMAND /bin/sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/test_main_invalid_input_message.sh $<TARGET_FILE:paretoMe> ${CMAKE_CURRENT_SOURCE_DIR}/data/extra_value.ssv
+)
+
+add_test(
 	NAME test_main_empty_input
 	COMMAND $<TARGET_FILE:paretoMe> 2 ${CMAKE_CURRENT_SOURCE_DIR}/data/empty.ssv
 )
