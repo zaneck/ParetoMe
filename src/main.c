@@ -155,7 +155,7 @@ main(int argc, char *argv[]){
   }
 
   printParetoArchive();
-
+  
   findMin();
   findMax();
   printf("min: ");
