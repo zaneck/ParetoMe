@@ -17,6 +17,7 @@
 #if ! defined (LIST_H)
 #define LIST_H 1
 
+#include <stddef.h>
 #include<stdbool.h>
 
 typedef struct list_s* list_t;
@@ -32,6 +33,9 @@ extern void freeList (list_t);
 
 typedef struct node_s* node_t;
 
+typedef void* (*list_malloc_fn_t)(size_t);
+typedef void (*list_free_fn_t)(void *);
+
 extern node_t getHead(list_t);
 extern node_t getTail(list_t);
 extern bool hasNext(node_t);
@@ -41,6 +45,7 @@ extern node_t previous(node_t);
 extern void* getData(node_t);
 
 extern void removeNode(list_t, node_t);
+extern void setListMemoryHooks(list_malloc_fn_t, list_free_fn_t);
 /* extern void addPrevious(node_t, void*); */
 /* extern void addNext(node_t, void*); */
 

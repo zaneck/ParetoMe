@@ -20,11 +20,20 @@
 #include "list.h"
 #include "list-local.h"
 
+static list_malloc_fn_t list_malloc_hook = malloc;
+static list_free_fn_t list_free_hook = free;
+
+void
+setListMemoryHooks(list_malloc_fn_t malloc_fn, list_free_fn_t free_fn){
+  list_malloc_hook = (malloc_fn != NULL) ? malloc_fn : malloc;
+  list_free_hook = (free_fn != NULL) ? free_fn : free;
+}
+
 node_t
 newNode (void* data){
   node_t new;
 
-  new = (node_t) malloc (sizeof (struct node_s));
+  new = (node_t) list_malloc_hook (sizeof (struct node_s));
 
   if (new != NULL){
     new->next = NULL;
@@ -38,7 +47,7 @@ list_t
 newList (void){
   list_t new;
 
-  new = (list_t) malloc (sizeof (struct list_s));
+  new = (list_t) list_malloc_hook (sizeof (struct list_s));
 
   if (new != NULL){
     new->head = NULL;
@@ -112,7 +121,7 @@ void removeHead(list_t a){
       a->head=n->next;
       a->head->previous=NULL;
     }    
-    free(n);
+    list_free_hook(n);
   }
 }
 
@@ -130,7 +139,7 @@ void removeTail(list_t a){
       a->tail=n->previous;
       a->tail->next=NULL;
     }
-    free(n);
+    list_free_hook(n);
   }
 }
 
@@ -158,11 +167,11 @@ freeList (list_t a){
      n = a->head;
      while (n != a->tail){
        n = n->next;
-       free (n->previous);
+       list_free_hook (n->previous);
      }
-     free (n);
+     list_free_hook (n);
    }
-  free (a);
+  list_free_hook (a);
 }
 
 node_t
@@ -216,7 +225,7 @@ removeNode(list_t l, node_t n){
     l->tail=n->previous;
   }
   
-  free(n);
+  list_free_hook(n);
 }
 
 /* void */

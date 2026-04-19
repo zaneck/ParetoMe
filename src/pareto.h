@@ -15,6 +15,7 @@ extern void freeArchive(void);
 
 /*online mode*/
 extern void addToPareto(double*);
+extern int domine(double*, double*);
 
 extern double* max;
 extern double* min;
